@@ -87,7 +87,6 @@
 
 .news-item {
   display: flex;
-  justify-content: space-between;
   height: 200rpx;
   margin: 0 32rpx;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2)
@@ -98,6 +97,13 @@
   height: 150rpx;
   font-size: 32rpx;
   margin-right: 16rpx;
+  flex: 1 1 auto;
+}
+.news-item-image {
+  margin: auto 0;
+  height: 150rpx;
+  max-width: 150rpx; 
+  background-color: #f8bbd0;
 }
 
 .news-item-title {
@@ -124,12 +130,4 @@
 
 .news-item-date {
   margin-left: 32rpx;
-}
-
-.news-item-image {
-  margin: auto 0;
-  flex: 1 0 auto;
-  height: 150rpx;
-  max-width: 150rpx; 
-  background-color: #f8bbd0;
 }

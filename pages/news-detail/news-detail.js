@@ -5,62 +5,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    newsId: 0,
+    newsDetail: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
+   * 存储新闻列表页面传递过来的newsId,
+   * 并调用getNewsDetail函数从网络获取数据
    */
   onLoad: function (options) {
-  
+    let newsId = options.newsId;
+    console.log(newsId);
+    if (newsId) {
+      this.setData({
+        newsId: newsId
+      });
+    }
+
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 下拉刷新，调用getNewsDetail函数重新取新闻详情信息
    */
-  onReady: function () {
+  onPullDownRefresh: () => {
   
   },
-
   /**
-   * 生命周期函数--监听页面显示
+   * 调用接口, 根据newsId获取新闻详情信息
    */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  getNewsDetail() {
+    
   }
 })
