@@ -6,6 +6,7 @@
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#c2185b",
     "navigationBarTitleText": "末日头条",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh": true
   }
 }

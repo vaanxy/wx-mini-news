@@ -24,13 +24,14 @@
 }
 
 .news-wrapper {
-  margin-top: 89rpx;
+  position: relative;
+  top: 89rpx;
 }
 
 .hot-news-wrapper {
   position: relative;
   height: 400rpx;
-  margin: 121rpx 32rpx 32rpx;/* 89 + 32 */
+  margin: 32rpx;
   overflow:auto;
   border-radius: 16rpx;
   box-shadow: 0 10rpx 40rpx 0 rgba(0,0,0,.19); 

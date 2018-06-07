@@ -1,5 +1,5 @@
 <!-- 新闻分类选项卡 -->
-<view class="category-wrapper">
+ <view class="category-wrapper">
   <view
     class="category-tab"
     bindtap="onTapCategory"
@@ -9,7 +9,7 @@
     <view class="category-text" style="{{selectedCategory.code === item.code ? 'opacity: 1' : 'opacity: 0.6'}}">{{item.name}}</view>
     <view class="category-indicator" style="{{selectedCategory.code === item.code ? 'opacity: 1' : 'opacity: 0'}}"></view>
   </view>
-</view>
+</view> 
 
 <!-- 新闻内容 -->
 <view class="news-wrapper">

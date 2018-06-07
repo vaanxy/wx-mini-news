@@ -31,7 +31,10 @@ Page({
     });
     this.getNewsList();
   },
-  getNewsList() {
+  onPullDownRefresh() {
+    this.getNewsList(() => wx.stopPullDownRefresh());
+  },
+  getNewsList(cb) {
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
@@ -53,8 +56,10 @@ Page({
           newsList: newsList.slice(1),
           hotNews: newsList[0]
         });
+      },
+      complete: () => {
+        cb && cb();
       }
     })
   }
-
-})
+});
