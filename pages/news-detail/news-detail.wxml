@@ -1,19 +1,19 @@
 <!--pages/news-detail/news-detail.wxml-->
 <view class="news-head-wrapper">
   <view class="news-info">
-    <view class="news-title">新闻标题提提提提提提</view>
+    <view class="news-title">{{newsDetail.title}}</view>
     <view class="news-meta-info">
-      <view class="news-source">人民日报</view>
-      <view class="news-date">2018-6-6 10:33</view>
-      <view class="news-read-count">阅读量: 2333</view>
+      <view class="news-source">{{newsDetail.source}}</view>
+      <view class="news-date">{{newsDetail.date}}</view>
+      <view class="news-read-count">阅读量: {{newsDetail.readCount}}</view>
     </view>
   </view>
-  <image class="news-head-image" src="/images/sunny-bg.png"></image>
+  <image class="news-head-image" src="{{newsDetail.firstImage}}"></image>
 </view>
 
 <view class="news-content-wrapper">
-  <view class="news-section" wx:for="{{[1,2,3]}}">
-    <view class="news-text">海外网4月5日电 据韩联社报道，当地时间5日下午2点47分，一架疑似韩国空军F-15K战斗机在庆尚北道漆谷郡坠落。</view>
-    <image class="news-image" src="/images/cloudy-bg.png"></image>
+  <view class="news-section" wx:for="{{newsDetail.content}}" wx:key="id">
+    <view wx:if="{{item.type !== 'image'}}" class="news-text {{item.type === 'strong' ? 'strong' : ''}}">{{item.text}}</view>
+    <image wx:if="{{item.type === 'image'}}" class="news-image" mode="widthFix" src="{{item.src}}"></image>
   </view>
 </view>
