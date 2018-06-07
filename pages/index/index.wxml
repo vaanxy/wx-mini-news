@@ -1,0 +1,10 @@
+<!--index.wxml-->
+  <view class="category-wrapper">
+    <view class="category-tab" bindtap="onTapCategory" data-category="{{item}}" wx:for="{{category}}">
+      <view class="category-text" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0.6'}}">{{item}}</view>
+      <view class="category-indicator" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0'}}"></view>
+    </view>
+  </view>
+<view class="container">
+  末日头条首页
+</view>

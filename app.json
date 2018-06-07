@@ -1,0 +1,11 @@
+{
+  "pages":[
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#c2185b",
+    "navigationBarTitleText": "末日头条",
+    "navigationBarTextStyle":"black"
+  }
+}
