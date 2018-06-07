@@ -1,10 +1,42 @@
-<!--index.wxml-->
-  <view class="category-wrapper">
-    <view class="category-tab" bindtap="onTapCategory" data-category="{{item}}" wx:for="{{category}}">
-      <view class="category-text" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0.6'}}">{{item}}</view>
-      <view class="category-indicator" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0'}}"></view>
+<!-- 新闻分类选项卡 -->
+<view class="category-wrapper">
+  <view class="category-tab" bindtap="onTapCategory" data-category="{{item}}" wx:for="{{category}}">
+    <view class="category-text" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0.6'}}">{{item}}</view>
+    <view class="category-indicator" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0'}}"></view>
+  </view>
+</view>
+
+<!-- 新闻内容 -->
+<view class="news-wrapper">
+  <!-- 热点新闻容器 -->
+  <view class="hot-news-wrapper">
+    <!-- 热点新闻基本信息 -->
+    <view class="hot-news-info">
+      <view class="hot-news-title">第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻</view>
+      <view class="hot-news-source-date">
+        <view class="hot-news-source">人民日报</view>
+        <view class="hot-news-date">2018-06-06</view>
+      </view>
+    </view>
+    <!-- 热点新闻TAG -->
+    <view class="hot-news-tag">热点</view>
+    <!-- 热点新闻图片 -->
+    <image class="hot-news-image" src="/images/cloudy-bg.png" mode="scaleToFill"></image>
+  </view>
+
+  <!-- 新闻列表 -->
+  <view class="news-list-wrapper">
+    <view class="news-item" wx:for="{{[1,2,3,4,5]}}">
+      <!-- 新闻基本信息 -->
+      <view class="news-item-info">
+        <view class="news-item-title">大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻</view>
+        <view class="news-item-source-date">
+          <view class="news-item-source">人民日报</view>
+          <view class="news-item-date">2018-06-06</view>
+        </view>
+      </view>
+      <!-- 新闻图片 -->
+      <image class="news-item-image" src="/images/sunny-bg.png"></image>
     </view>
   </view>
-<view class="container">
-  末日头条首页
 </view>
