@@ -17,7 +17,7 @@ Page({
       title: '加载中...',
       source: '',
       date: '',
-      firstImage: '/Images/cloudy-bg.png'
+      firstImage: '/images/cloudy-bg.png'
     }
   },
   onLoad() {
@@ -46,10 +46,11 @@ Page({
         res.data.result.forEach(news => {
           let date = new Date(news.date);
           newsList.push({
+            id: news.id,
             title: news.title,
             date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
             source: news.source === '' ? '未知来源' : news.source,
-            firstImage: news.firstImage
+            firstImage: news.firstImage ? news.firstImage : '/images/sunny-bg.png'
           });
         });
         this.setData({
@@ -60,6 +61,13 @@ Page({
       complete: () => {
         cb && cb();
       }
+    })
+  },
+  toNewsDetail(event) {
+    let newsId = event.currentTarget.dataset.id;
+    console.log(newsId);
+    wx.navigateTo({
+      url: '/pages/news-detail/news-detail?newsId=' + newsId,
     })
   }
 });

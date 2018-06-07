@@ -31,7 +31,13 @@
 
   <!-- 新闻列表 -->
   <view class="news-list-wrapper">
-    <view class="news-item" wx:for="{{newsList}}" wx:key="id" wx:for-item="news">
+    <view
+      class="news-item"
+      wx:for="{{newsList}}"
+      wx:key="id"
+      wx:for-item="news"
+      data-id="{{news.id}}"
+      bindtap="toNewsDetail">
       <!-- 新闻基本信息 -->
       <view class="news-item-info">
         <view class="news-item-title">{{news.title}}</view>
