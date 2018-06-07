@@ -1,8 +1,13 @@
 <!-- 新闻分类选项卡 -->
 <view class="category-wrapper">
-  <view class="category-tab" bindtap="onTapCategory" data-category="{{item}}" wx:for="{{category}}">
-    <view class="category-text" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0.6'}}">{{item}}</view>
-    <view class="category-indicator" style="{{selectedCategory === item ? 'opacity: 1' : 'opacity: 0'}}"></view>
+  <view
+    class="category-tab"
+    bindtap="onTapCategory"
+    data-category="{{item}}"
+    wx:for="{{categories}}"
+    wx:key="*this">
+    <view class="category-text" style="{{selectedCategory.code === item.code ? 'opacity: 1' : 'opacity: 0.6'}}">{{item.name}}</view>
+    <view class="category-indicator" style="{{selectedCategory.code === item.code ? 'opacity: 1' : 'opacity: 0'}}"></view>
   </view>
 </view>
 
@@ -12,31 +17,31 @@
   <view class="hot-news-wrapper">
     <!-- 热点新闻基本信息 -->
     <view class="hot-news-info">
-      <view class="hot-news-title">第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻第一条新闻</view>
+      <view class="hot-news-title">{{hotNews.title}}</view>
       <view class="hot-news-source-date">
-        <view class="hot-news-source">人民日报</view>
-        <view class="hot-news-date">2018-06-06</view>
+        <view class="hot-news-source">{{hotNews.source}}</view>
+        <view class="hot-news-date">{{hotNews.date}}</view>
       </view>
     </view>
     <!-- 热点新闻TAG -->
     <view class="hot-news-tag">热点</view>
     <!-- 热点新闻图片 -->
-    <image class="hot-news-image" src="/images/cloudy-bg.png" mode="scaleToFill"></image>
+    <image class="hot-news-image" src="{{hotNews.firstImage}}" mode="scaleToFill"></image>
   </view>
 
   <!-- 新闻列表 -->
   <view class="news-list-wrapper">
-    <view class="news-item" wx:for="{{[1,2,3,4,5]}}">
+    <view class="news-item" wx:for="{{newsList}}" wx:key="id" wx:for-item="news">
       <!-- 新闻基本信息 -->
       <view class="news-item-info">
-        <view class="news-item-title">大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻大新闻</view>
+        <view class="news-item-title">{{news.title}}</view>
         <view class="news-item-source-date">
-          <view class="news-item-source">人民日报</view>
-          <view class="news-item-date">2018-06-06</view>
+          <view class="news-item-source">{{news.source}}</view>
+          <view class="news-item-date">{{news.date}}</view>
         </view>
       </view>
       <!-- 新闻图片 -->
-      <image class="news-item-image" src="/images/sunny-bg.png"></image>
+       <image class="news-item-image" src="{{news.firstImage}}"></image> 
     </view>
   </view>
 </view>

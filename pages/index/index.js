@@ -1,20 +1,27 @@
 //index.js
-const categoryMap = {
-  gn: '国内',
-  gj: '国际',
-  cj: '财经',
-  yl: '娱乐',
-  js: '军事',
-  ty: '体育',
-  qt: '其他'
-}
+const categories = [
+  { code: 'gn', name: '国内' },
+  { code: 'gj', name: '国际' },
+  { code: 'cj', name: '财经' },
+  { code: 'yl', name: '娱乐' },
+  { code: 'js', name: '军事' },
+  { code: 'ty', name: '体育' },
+  { code: 'other', name: '其他' }
+]
 Page({
   data: {
-    category: ['国内', '国际', '财经', '娱乐', '军事', '体育', '其他'],
-    selectedCategory: '国内'
+    categories: categories,
+    selectedCategory: categories[0],
+    newsList: [],
+    hotNews: {
+      title: '加载中...',
+      source: '',
+      date: '',
+      firstImage: '/Images/cloudy-bg.png'
+    }
   },
   onLoad() {
-    // this.setData
+    this.getNewsList();
   },
   onTapCategory(event) {
     console.log(event);
@@ -22,6 +29,32 @@ Page({
     this.setData({
       selectedCategory: category
     });
+    this.getNewsList();
+  },
+  getNewsList() {
+    wx.request({
+      url: 'https://test-miniprogram.com/api/news/list',
+      data: {
+        type: this.data.selectedCategory.code
+      },
+      success: (res) => {
+        console.log(res.data.result);
+        let newsList = [];
+        res.data.result.forEach(news => {
+          let date = new Date(news.date);
+          newsList.push({
+            title: news.title,
+            date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+            source: news.source === '' ? '未知来源' : news.source,
+            firstImage: news.firstImage
+          });
+        });
+        this.setData({
+          newsList: newsList.slice(1),
+          hotNews: newsList[0]
+        });
+      }
+    })
   }
 
 })

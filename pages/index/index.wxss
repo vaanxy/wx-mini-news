@@ -43,8 +43,10 @@
   line-height: 45rpx;
   color: white;
   left: 0;
+  right: 0;
+  bottom: 0;
   padding: 16rpx 32rpx;
-  bottom:0;
+  
   background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5))
 }
 .hot-news-source-date {
@@ -84,6 +86,7 @@
 
 .news-item {
   display: flex;
+  justify-content: space-between;
   height: 200rpx;
   margin: 0 32rpx;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2)
@@ -126,6 +129,6 @@
   margin: auto 0;
   flex: 1 0 auto;
   height: 150rpx;
-  width: 150rpx;
+  max-width: 150rpx; 
   background-color: #f8bbd0;
 }
