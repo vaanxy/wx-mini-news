@@ -14,21 +14,63 @@ const categories = [
 Page({
   data: {
     categories: categories,
-    selectedCategory: categories[0], //当前选中的新闻类别，默认选中第一个
-    newsList: [],
+    selectedCategoryCode: categories[0].code, //当前选中的新闻类别，默认选中第一个
+    newsListMap: {},
     hotNews: {
       title: '加载中...',
       source: '',
       date: '',
       firstImage: '/images/cloudy-bg.png'
-    }
+    },
+    swiperHeight: 0
   },
 
   /**
    * 页面加载后，通过getNewsList函数从网络获取当前选中类别的新闻列表
    */
   onLoad() {
+    this.setSwiperHeight();
+    this.initNewsListMap();
     this.getNewsList();
+
+  },
+
+  /**
+   * 初始化新闻类别和新闻列表的映射字典
+   */
+  initNewsListMap() {
+    let newsList = [];
+    let newsListMap = {};
+    this.data.categories.forEach((category) => {
+      newsListMap[category.code] = {
+        newsList: [],
+        hotNews: {
+          title: '加载中...',
+          source: '',
+          date: '',
+          firstImage: '/images/cloudy-bg.png'
+        }
+      };
+    });
+    this.setData({
+      newsListMap: newsListMap
+    });
+  },
+
+  /**
+   * 由于swpier默认高度是150px,
+   * 为了让swiper能够填充整个屏幕的高度，
+   * 需要获取屏幕尺寸，动态计算swiper应该占用的高度(rpx)
+   */
+  setSwiperHeight() {
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          // 89为新闻类别选项卡的高度
+          swiperHeight: 750 / res.windowWidth * res.windowHeight - 89
+        })
+      },
+    });
   },
 
   /**
@@ -37,9 +79,9 @@ Page({
    */
   onTapCategory(event) {
     console.log(event);
-    let category = event.currentTarget.dataset['category'];
+    let categoryCode = event.currentTarget.dataset['categoryCode'];
     this.setData({
-      selectedCategory: category
+      selectedCategoryCode: categoryCode
     });
     this.getNewsList();
   },
@@ -60,7 +102,7 @@ Page({
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
-        type: this.data.selectedCategory.code
+        type: this.data.selectedCategoryCode
       },
       success: (res) => {
         console.log(res.data.result);
@@ -76,15 +118,37 @@ Page({
             firstImage: news.firstImage ? news.firstImage : '/images/sunny-bg.png'
           });
         });
-        this.setData({
+        let newsListMap = this.data.newsListMap;
+        newsListMap[this.data.selectedCategoryCode] = {
           newsList: newsList.slice(1),
           hotNews: newsList[0]
+        }
+        this.setData({
+          newsListMap: newsListMap
         });
       },
       complete: () => {
         cb && cb();
       }
     });
+  },
+
+  bindChange(event) {
+    console.log(event);
+    // https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html 
+    // Bug & Tip:
+    // 如果在 bindchange 的事件回调函数中使用 setData 改变 current 值，则有可能导致 setData 被不停地调用，
+    // 因而通常情况下请在改变 current 值前检测 source 字段来判断是否是由于用户触摸引起。
+    //
+    // 通过Tap点击新闻类别选项卡时已经setData并获取网络数据，
+    // 此时event.detail.source === '', 不需要再次重复setData及获取网络数据
+    if (event.detail.source === 'touch') {
+      this.setData({
+        selectedCategoryCode: event.detail.currentItemId
+      });
+      this.getNewsList();
+    } 
+
   },
 
   /**
